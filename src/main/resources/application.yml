@@ -1,0 +1,28 @@
+spring:
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/bank}
+    username: ${DB_USER:bank}
+    password: ${DB_PASSWORD:bank}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+  cache:
+    type: caffeine
+    cache-names: users
+    caffeine:
+      spec: maximumSize=10000,expireAfterWrite=10m
+
+app:
+  jwt:
+    secret: ${JWT_SECRET:change-me-change-me-change-me-change-me-1234}
+    ttl-minutes: 120
+  interest:
+    enabled: true
+    rate: 0.10
+    max-multiplier: 2.07
+    period-ms: 30000
+
+logging:
+  level:
+    com.example.bank: INFO
